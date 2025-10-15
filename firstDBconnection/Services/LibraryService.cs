@@ -3,6 +3,9 @@ using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Linq;
+using firstDBconnection.Exceptions;
+
+
 
 namespace firstDBconnection.Services
 {
@@ -29,7 +32,14 @@ namespace firstDBconnection.Services
 
         public async Task<Author> GetAuthor(int id)
         {
-            return await _context.Authors.FirstOrDefaultAsync(a => a.Id == id);
+            var author = await _context.Authors.FirstOrDefaultAsync(a => a.Id == id);
+    
+            if (author == null)
+            {
+                throw new AuthorNotFoundException($"Author with ID {id} not found.");
+            }
+
+            return author;
         }
 
         public async Task<Book> AddBook(Book book)
