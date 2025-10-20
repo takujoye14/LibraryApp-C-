@@ -61,5 +61,7 @@ jobs:
         with:
           app-name: 'TJLibrary'
           slot-name: 'Production'
-          package: .
+          package: myapp
+          
+
           
